@@ -25,7 +25,7 @@ function App() {
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': 'tPH4Gsq6yd9eJ91iksUmB6pRIw7H33Zy5yIOGEPk'
+                    'x-api-key': '000000000000000000000'
                 },
                 body: JSON.stringify({
                     body: `${mergedData} The previous data is a json from a architecture project being designed please take it into consideration
