@@ -20,6 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+      
+      - name: Replace secret in src/index.jsx
+        run: sed -i 's/000000000000000000000/${{ secrets.EVERSE_AWS_API_FORMA_SECRET }}/g' src/index.jsx
 
       - name: Build the project
         run: npm run build
@@ -34,6 +37,3 @@ jobs:
       - name: Sync files to S3
         run: |
           aws s3 sync dist/ s3://${{ secrets.EVERSE_AWS_S3_BUCKET_NAME_FORMA_EXTENSION }} --delete
-
-      - name: Post-deployment actions
-        run: npm run postversion
