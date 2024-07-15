@@ -1,0 +1,39 @@
+name: Build and Deploy to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.EVERSE_AWS_S3_BUCKET_SECRET_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.EVERSE_AWS_S3_BUCKET_SECRET_KEY_SECRET }}
+          aws-region: ${{ secrets.AWS_REGION_BUCKETS }}
+
+      - name: Sync files to S3
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.EVERSE_AWS_S3_BUCKET_NAME_FORMA_EXTENSION }} --delete
+
+      - name: Post-deployment actions
+        run: npm run postversion
