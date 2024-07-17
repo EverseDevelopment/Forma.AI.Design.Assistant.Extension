@@ -21,6 +21,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    max-height: 400px;
 }
 
 header {
@@ -81,6 +82,7 @@ main {
 
 .content {
     width: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -132,4 +134,15 @@ main {
 
 .spacer {
     flex-grow: 1;
+}
+
+/* New styles for the selected tab */
+.Mui-selected {
+    color: #0696D7 !important; /* Change 'blue' to your desired color */
+}
+
+/* Styles for the tab indicator */
+.MuiTabs-indicator {
+    background-color: #0696D7 !important; /* Change 'blue' to your desired color */
+    height: 3px; /* Adjust the height of the indicator */
 }
